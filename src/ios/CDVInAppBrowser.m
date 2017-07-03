@@ -446,7 +446,7 @@
 
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
     }
-[self openInSystem:url];
+// [self openInSystem:url];
     return YES;
 }
 
