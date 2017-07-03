@@ -412,7 +412,7 @@
 		[theWebView stopLoading];
 		[self openInSystem:url];
 	}
-    elseif ([[url scheme] isEqualToString:@"gap-iab"]) {
+    else if ([[url scheme] isEqualToString:@"gap-iab"]) {
         NSString* scriptCallbackId = [url host];
         CDVPluginResult* pluginResult = nil;
 
