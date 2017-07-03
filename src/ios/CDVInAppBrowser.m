@@ -408,7 +408,11 @@
 
     // See if the url uses the 'gap-iab' protocol. If so, the host should be the id of a callback to execute,
     // and the path, if present, should be a JSON-encoded value to pass to the callback.
-    if ([[url scheme] isEqualToString:@"gap-iab"]) {
+	if (url.rangeOfString('viompaext') != nil)	{
+		[theWebView stopLoading];
+		[self openInSystem:url];
+	}
+    elseif ([[url scheme] isEqualToString:@"gap-iab"]) {
         NSString* scriptCallbackId = [url host];
         CDVPluginResult* pluginResult = nil;
 
@@ -446,7 +450,7 @@
 
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.callbackId];
     }
-// [self openInSystem:url];
+
     return YES;
 }
 
