@@ -408,7 +408,8 @@
 
     // See if the url uses the 'gap-iab' protocol. If so, the host should be the id of a callback to execute,
     // and the path, if present, should be a JSON-encoded value to pass to the callback.
-	if (url.rangeOfString('viompaext') != nil)	{
+	// if (url.rangeOfString('viompaext') != nil)	{
+	if ([url rangeOfString:@"viompaext"] != 0) {
 		[theWebView stopLoading];
 		[self openInSystem:url];
 	}
