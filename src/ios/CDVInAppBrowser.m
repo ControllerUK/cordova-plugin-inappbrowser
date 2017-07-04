@@ -410,7 +410,7 @@
     // and the path, if present, should be a JSON-encoded value to pass to the callback.
 	// if (url.rangeOfString('viompaext') != nil)	{
 	NSString* urlstr = [url absoluteString];
-	if ([urlstr rangeOfString:@"viompaext"] != 0) {
+	if ([urlstr rangeOfString:@"viompaext"].length != 0) {
 		[theWebView stopLoading];
 		[self openInSystem:url];
 	}
@@ -603,9 +603,6 @@
     self.toolbar.multipleTouchEnabled = NO;
     self.toolbar.opaque = NO;
     self.toolbar.userInteractionEnabled = YES;
-
-    CGFloat labelInset = 5.0;
-    float locationBarY = toolbarIsAtBottom ? self.view.bounds.size.height - FOOTER_HEIGHT : self.view.bounds.size.height;
 
     NSString* frontArrowString = NSLocalizedString(@"►", nil); // create arrow from Unicode char
     self.forwardButton = [[UIBarButtonItem alloc] initWithTitle:frontArrowString style:UIBarButtonItemStylePlain target:self action:@selector(goForward:)];
