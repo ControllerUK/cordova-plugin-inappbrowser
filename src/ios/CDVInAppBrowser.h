@@ -31,9 +31,9 @@
 
 @interface CDVInAppBrowser : CDVPlugin {
     @private
-	@property (nonatomic, assign) BOOL CacheCleared;
 	// BOOL CacheCleared;
 }
+@property (nonatomic, assign) BOOL CacheCleared;
 
 @property (nonatomic, retain) CDVInAppBrowserViewController* inAppBrowserViewController;
 @property (nonatomic, copy) NSString* callbackId;
