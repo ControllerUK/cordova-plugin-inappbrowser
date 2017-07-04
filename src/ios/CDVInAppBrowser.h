@@ -30,7 +30,8 @@
 @class CDVInAppBrowserViewController;
 
 @interface CDVInAppBrowser : CDVPlugin {
-	@property (nonatomic, assign) BOOL CacheCleared;
+    @private
+	BOOL CacheCleared;
 }
 
 @property (nonatomic, retain) CDVInAppBrowserViewController* inAppBrowserViewController;
