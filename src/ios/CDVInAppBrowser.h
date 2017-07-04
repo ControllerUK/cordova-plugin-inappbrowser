@@ -93,6 +93,7 @@
 @property (nonatomic, weak) id <CDVScreenOrientationDelegate> orientationDelegate;
 @property (nonatomic, weak) CDVInAppBrowser* navigationDelegate;
 @property (nonatomic) NSURL* currentURL;
+@property (nonatomic, assign) BOOL CacheCleared;
 
 - (void)close;
 - (void)navigateTo:(NSURL*)url;

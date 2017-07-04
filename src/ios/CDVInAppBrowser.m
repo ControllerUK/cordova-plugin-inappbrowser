@@ -119,7 +119,7 @@
 {
     CDVInAppBrowserOptions* browserOptions = [CDVInAppBrowserOptions parseOptions:options];
 
-    if (browserOptions.clearcache) {
+    if (!self.CacheCleared) {
         NSHTTPCookie *cookie;
         NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         for (cookie in [storage cookies])
@@ -130,7 +130,7 @@
         }
     }
 
-    if (browserOptions.clearsessioncache) {
+    if (!self.CacheCleared) {
         NSHTTPCookie *cookie;
         NSHTTPCookieStorage *storage = [NSHTTPCookieStorage sharedHTTPCookieStorage];
         for (cookie in [storage cookies])
@@ -140,6 +140,7 @@
             }
         }
     }
+	self.CacheCleared = true;
 
     if (self.inAppBrowserViewController == nil) {
         NSString* userAgent = [CDVUserAgentUtil originalUserAgent];
@@ -410,7 +411,11 @@
     // and the path, if present, should be a JSON-encoded value to pass to the callback.
 	// if (url.rangeOfString('viompaext') != nil)	{
 	NSString* urlstr = [url absoluteString];
-	if ([urlstr rangeOfString:@"viompaext"].length != 0) {
+	if ([urlstr rangeOfString:@"?viompaext="].length != 0) {
+		[theWebView stopLoading];
+		[self openInSystem:url];
+	}
+	else if ([urlstr rangeOfString:@"@viompaext="].length != 0) {
 		[theWebView stopLoading];
 		[self openInSystem:url];
 	}
@@ -438,8 +443,8 @@
             return NO;
         }
     }
-    //if is an app store link, let the system handle it, otherwise it fails to load it
     else if ([[ url scheme] isEqualToString:@"itms-appss"] || [[ url scheme] isEqualToString:@"itms-apps"]) {
+		//if is an app store link, let the system handle it, otherwise it fails to load it
         [theWebView stopLoading];
         [self openInSystem:url];
         return NO;
@@ -898,8 +903,6 @@
         self.toolbar = YES;
         self.closebuttoncaption = nil;
         self.toolbarposition = kInAppBrowserToolbarBarPositionBottom;
-        self.clearcache = NO;
-        self.clearsessioncache = NO;
 
         self.enableviewportscale = NO;
         self.mediaplaybackrequiresuseraction = NO;
