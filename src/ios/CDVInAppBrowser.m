@@ -655,6 +655,8 @@
 {
     CGRect toolbarFrame = self.toolbar.frame;
     BOOL locationbarVisible = false;
+	
+	show = false;
 
     // prevent double show/hide
     if (show == !(self.toolbar.hidden)) {
