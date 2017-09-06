@@ -419,7 +419,7 @@
 		[theWebView stopLoading];
 		[self openInSystem:url];
 	}
-	else if ([urlstr rangeOfString:@".pdf" options:NSCaseInsensitiveSearch].length != 0) {
+	else if ([urlstr rangeOfString:@".pdf"].length != 0) {
 		[theWebView stopLoading];
 		[self openInSystem:url];
 	}
@@ -591,6 +591,7 @@
 
     self.closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Start" style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
 	self.closeButton.enabled = YES;
+    self.closeButton.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1];
 
     UIBarButtonItem* flexibleSpaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
