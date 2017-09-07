@@ -415,11 +415,7 @@
 		[theWebView stopLoading];
 		[self openInSystem:url];
 	}
-	else if ([urlstr rangeOfString:@"&viompaext="].length != 0) {
-		[theWebView stopLoading];
-		[self openInSystem:url];
-	}
-	else if ([urlstr rangeOfString:@".pdf"].length != 0) {
+	else if ([urlstr rangeOfString:@"@viompaext="].length != 0) {
 		[theWebView stopLoading];
 		[self openInSystem:url];
 	}
@@ -589,9 +585,8 @@
     self.spinner.userInteractionEnabled = NO;
     [self.spinner stopAnimating];
 
-    self.closeButton = [[UIBarButtonItem alloc] initWithTitle:@"Start" style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
-	self.closeButton.enabled = YES;
-    self.closeButton.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1];
+    self.closeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(close)];
+    self.closeButton.enabled = YES;
 
     UIBarButtonItem* flexibleSpaceButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
 
@@ -640,6 +635,16 @@
 
 - (void)setCloseButtonTitle:(NSString*)title
 {
+    // the advantage of using UIBarButtonSystemItemDone is the system will localize it for you automatically
+    // but, if you want to set this yourself, knock yourself out (we can't set the title for a system Done button, so we have to create a new one)
+    self.closeButton = nil;
+    self.closeButton = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStyleBordered target:self action:@selector(close)];
+    self.closeButton.enabled = YES;
+    self.closeButton.tintColor = [UIColor colorWithRed:0.0 green:0.0 blue:0.0 alpha:1];
+
+    NSMutableArray* items = [self.toolbar.items mutableCopy];
+    [items replaceObjectAtIndex:0 withObject:self.closeButton];
+    [self.toolbar setItems:items];
 }
 
 - (void)showLocationBar:(BOOL)show
